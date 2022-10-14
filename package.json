@@ -1,0 +1,54 @@
+{
+  "name": "mongo-cleaner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "prepare": "npm run build",
+    "start": "node dist/index.js",
+    "start:dev": "babel-node ./src/index",
+    "build": "babel src --source-maps --copy-files --delete-dir-on-start --out-dir=dist",
+    "lint": "eslint src",
+    "lint:dev": "eslint --fix src",
+    "test:base": "cross-env NODE_ENV=test mocha --require @babel/register",
+    "test": "npm run lint && npm run test:base -- src/*.spec.js",
+    "test:dev": "npm run lint:dev && npm run test:base -- src/*.spec.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@natlibfi/melinda-backend-commons": "^2.1.0",
+    "debug": "^4.3.4",
+    "moment": "^2.29.4",
+    "mongodb": "^4.10.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "latest",
+    "@babel/core": "latest",
+    "@babel/eslint-parser": "latest",
+    "@babel/node": "latest",
+    "@babel/preset-env": "latest",
+    "@babel/register": "latest",
+    "@natlibfi/eslint-config-melinda-backend": "latest",
+    "@natlibfi/fixugen": "latest",
+    "@natlibfi/fixura": "latest",
+    "@natlibfi/fixura-mongo": "^2.0.0-alpha.1",
+    "chai": "latest",
+    "cross-env": "latest",
+    "eslint": "latest",
+    "mocha": "latest"
+  },
+  "eslintConfig": {
+    "extends": "@natlibfi/melinda-backend"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": "maintained node versions"
+        }
+      ]
+    ]
+  }
+}

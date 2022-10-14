@@ -1,0 +1,15 @@
+{
+  "description": "Remove content that has modificationTime before 2021-01-01 from 2 collections. 1 Left ",
+  "only": false,
+  "removeDateLimit": "2021-01-01",
+  "mongoDatabaseAndCollections": [
+    {
+      "db": "",
+      "collection": "foo"
+    },
+    {
+      "db": "",
+      "collection": "bar"
+    }
+  ]
+}
