@@ -4,17 +4,17 @@
   "license": "MIT",
   "description": "Mongo database cleaner. Removes all items from collection based on modificationTime time stamp (UTC)",
   "author": {
-		"name": "The National Library of Finland"
-	},
+    "name": "The National Library of Finland"
+  },
   "homepage": "https://github.com/natlibfi/mongo-cleaner",
-	"bugs": {
-		"url": "https://github.com/natlibfi/mongo-cleaner/issues"
-	},
+  "bugs": {
+    "url": "https://github.com/natlibfi/mongo-cleaner/issues"
+  },
   "main": "src/index.js",
   "engines": {
-		"node": ">=14"
-	},
-	"bin": "./dist/index.js",
+    "node": ">=14"
+  },
+  "bin": "./dist/index.js",
   "scripts": {
     "prepare": "npm run build",
     "start": "node dist/index.js",
@@ -30,6 +30,7 @@
     "@natlibfi/melinda-backend-commons": "^2.1.0",
     "debug": "^4.3.4",
     "moment": "^2.29.4",
+    "mongo-sanitize": "^1.1.0",
     "mongodb": "^4.10.0"
   },
   "devDependencies": {
@@ -49,7 +50,7 @@
     "mocha": "latest"
   },
   "eslintConfig": {
-		"parser": "@babel/eslint-parser",
+    "parser": "@babel/eslint-parser",
     "extends": "@natlibfi/melinda-backend"
   },
   "babel": {

@@ -3,8 +3,10 @@
 import {MongoClient} from 'mongodb';
 import moment from 'moment';
 import {createLogger} from '@natlibfi/melinda-backend-commons';
+import sanitize from 'mongo-sanitize';
 
 export default async function ({removeDateLimit, mongoUri, mongoDatabaseAndCollections}) {
+  const cleanRemoveDateLimit = sanitize(removeDateLimit);
   const logger = createLogger();
   logger.info('Starting mongo cleaning');
   const client = await MongoClient.connect(mongoUri, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -23,7 +25,7 @@ export default async function ({removeDateLimit, mongoUri, mongoDatabaseAndColle
     // find and remove
     // params "modificationTime":"2020-01-01T00:00:01.000Z",
     const params = {
-      modificationTime: {$lte: `${moment.utc(removeDateLimit).format()}`, $gte: '1900-01-01T00:00:01Z'}
+      modificationTime: {$lte: `${moment.utc(cleanRemoveDateLimit).format()}`, $gte: '1900-01-01T00:00:01Z'}
     };
 
     const item = await mongoOperator.findOne(params);
