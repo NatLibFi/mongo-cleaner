@@ -8,7 +8,7 @@ run();
 
 async function run() {
 
-  const promises = ['1', '2'].map(async index => {
+  const promises = ['1', '2', '3', '4'].map(async index => {
     const {getFixture} = await fixtureFactory({
       root: [__dirname, '..', 'test-fixtures', 'clean', index],
       reader: READERS.JSON
@@ -32,14 +32,16 @@ async function run() {
 
 async function testProcess({getFixture, index, removeDateLimit, mongoDatabaseAndCollections}) {
   const mongoFixtures = await mongoFixturesFactory({rootPath: [__dirname, '..', 'test-fixtures', 'clean', index], useObjectId: false});
-  const mongoUri = await mongoFixtures.getUri();
-
-  await mongoFixtures.populate(['dbContents.json']);
-  await startApp({mongoUri, removeDateLimit, mongoDatabaseAndCollections});
-  const dump = await mongoFixtures.dump();
-  const expectedResult = getFixture('expectedResult.json');
-  expect(dump).to.eql(expectedResult);
-  mongoFixtures.clear();
-  mongoFixtures.close();
-  return;
+  try {
+    const mongoUri = await mongoFixtures.getUri();
+    await mongoFixtures.populate(['dbContents.json']);
+    await startApp({mongoUri, removeDateLimit, mongoDatabaseAndCollections});
+    const dump = await mongoFixtures.dump();
+    const expectedResult = getFixture('expectedResult.json');
+    expect(dump).to.eql(expectedResult);
+    return;
+  } finally {
+    mongoFixtures.clear();
+    mongoFixtures.close();
+  }
 }

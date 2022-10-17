@@ -11,9 +11,9 @@ export default async function ({removeDateLimit, mongoUri, mongoDatabaseAndColle
   logger.info('Starting mongo cleaning');
   const client = await MongoClient.connect(mongoUri, {useNewUrlParser: true, useUnifiedTopology: true});
 
-  const processes = mongoDatabaseAndCollections.map(({db, collection}) => {
+  const processes = mongoDatabaseAndCollections.map(({db, collection, removeProtected = false}) => {
     const dbOperator = db === '' ? client.db() : client.db(db);
-    return searchItem(dbOperator.collection(collection), collection);
+    return searchItem(dbOperator.collection(collection), collection, removeProtected);
   });
 
   await Promise.all(processes);
@@ -21,12 +21,10 @@ export default async function ({removeDateLimit, mongoUri, mongoDatabaseAndColle
   logger.info('Done');
   return;
 
-  async function searchItem(mongoOperator, collection) {
+  async function searchItem(mongoOperator, collection, removeProtected) {
     // find and remove
     // params "modificationTime":"2020-01-01T00:00:01.000Z",
-    const params = {
-      modificationTime: {$lte: `${moment.utc(cleanRemoveDateLimit).format()}`, $gte: '1900-01-01T00:00:01Z'}
-    };
+    const params = generateParams(removeProtected);
 
     const item = await mongoOperator.findOne(params);
 
@@ -37,5 +35,27 @@ export default async function ({removeDateLimit, mongoUri, mongoDatabaseAndColle
 
     logger.info(`Collection ${collection} done`); // eslint-disable-line no-console
     return;
+  }
+
+  function generateParams(removeProtected) {
+    if (removeProtected) {
+      return {
+        modificationTime: {$lte: `${moment.utc(cleanRemoveDateLimit).format()}`, $gte: '1900-01-01T00:00:01Z'}
+      };
+    }
+
+    return {
+      $and: [
+        {
+          modificationTime: {
+            $lte: `${moment.utc(cleanRemoveDateLimit).format()}`,
+            $gte: '1900-01-01T00:00:01Z'
+          }
+        },
+        {
+          protected: {$in: [null, false]}
+        }
+      ]
+    };
   }
 }

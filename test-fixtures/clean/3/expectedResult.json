@@ -1,0 +1,8 @@
+{
+  "foo": [
+    {"correlationId": "1", "modificationTime": "2020-01-01T00:00:01.000Z", "protected": true},
+    {"correlationId": "4", "modificationTime": "2021-01-02T00:00:01.000Z", "protected": true},
+    {"correlationId": "5", "modificationTime": "2021-01-02T00:00:01.000Z", "protected": false},
+    {"correlationId": "6", "modificationTime": "2021-01-02T00:00:01.000Z"}
+  ]
+}

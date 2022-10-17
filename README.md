@@ -2,17 +2,21 @@
 
 Mongo database cleaner. Removes all items from collection based on modificationTime time stamp (UTC)
 
-### **COMPATIBLE: MONGO 4.X**
-### **NOT COMPATIBLE: MONGO 3.X**
+**COMPATIBLE: MONGO 4.X**
+
+**NOT COMPATIBLE: MONGO 3.X**
 
 # Usage
-Envs:
-* REMOVE_DATE_LIMIT="2020-01-01"
-* MONGO_URI='mongodb://localhost:43575'
-* MONGO_DATABASE_AND_COLLECTIONS='[{"db": "databaseName", "collection": "collectionName"}]'
-* OR MONGO_DATABASE_AND_COLLECTIONS='[{"db": "", "collection": "collectionName"}]'
 
-Debug envs:
+## Envs:
+* REMOVE_DATE_LIMIT='2020-01-01'
+* MONGO_URI='mongodb://localhost:43575'
+* MONGO_DATABASE_AND_COLLECTIONS='[{"db": "", "collection": "collectionName", "removeProtected": false}]'
+  * db: Database name, "" makes mongo to use default database.
+  * collection: Database collection name.
+  * removeProtected: Boolean variable for forcing removal of protected items. Defaults false.
+
+## Debug envs:
 * LOG_LEVEL='debug'
 * MONGOMS_DEBUG=1
 

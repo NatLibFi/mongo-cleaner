@@ -1,0 +1,11 @@
+{
+  "description": "Remove content that is not protected and is older than limit",
+  "only": false,
+  "removeDateLimit": "2021-01-01",
+  "mongoDatabaseAndCollections": [
+    {
+      "db": "",
+      "collection": "foo"
+    }
+  ]
+}
