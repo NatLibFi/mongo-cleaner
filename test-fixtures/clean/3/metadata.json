@@ -1,11 +1,12 @@
 {
-  "description": "Remove content that is not protected and is older than limit",
+  "description": "Remove content that is not protected and is older than 2021-04-30, and force remove older than 2021-04-07",
   "only": false,
-  "removeDateLimit": "2021-01-01",
   "mongoDatabaseAndCollections": [
     {
       "db": "",
-      "collection": "foo"
+      "collection": "foo",
+      "softRemoveDays": 7,
+      "forceRemoveDays": 30
     }
   ]
 }

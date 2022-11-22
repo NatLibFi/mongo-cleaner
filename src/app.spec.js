@@ -7,7 +7,6 @@ import startApp from './app';
 run();
 
 async function run() {
-
   const promises = ['1', '2', '3', '4'].map(async index => {
     const {getFixture} = await fixtureFactory({
       root: [__dirname, '..', 'test-fixtures', 'clean', index],
@@ -30,12 +29,12 @@ async function run() {
   throw new Error('done');
 }
 
-async function testProcess({getFixture, index, removeDateLimit, mongoDatabaseAndCollections}) {
+async function testProcess({getFixture, index, mongoDatabaseAndCollections}) {
   const mongoFixtures = await mongoFixturesFactory({rootPath: [__dirname, '..', 'test-fixtures', 'clean', index], useObjectId: false});
   try {
     const mongoUri = await mongoFixtures.getUri();
     await mongoFixtures.populate(['dbContents.json']);
-    await startApp({mongoUri, removeDateLimit, mongoDatabaseAndCollections});
+    await startApp({mongoUri, mongoDatabaseAndCollections}, '2021-05-08');
     const dump = await mongoFixtures.dump();
     const expectedResult = getFixture('expectedResult.json');
     expect(dump).to.eql(expectedResult);

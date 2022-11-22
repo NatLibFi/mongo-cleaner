@@ -1,9 +1,10 @@
 {
   "foo": [
-    {"correlationId": "f544fd06-b77d-4c0c-8626-1dc39c84a4da", "modificationTime": "2022-01-01T00:00:01.000Z"},
-    {"correlationId": "f544fd06-b77d-4c0c-8626-1dc39c84a4db", "modificationTime": "2020-01-01T00:00:01.000Z"},
-    {"correlationId": "f544fd06-b77d-4c0c-8626-1dc39c84a4dc", "modificationTime": "2015-01-01T00:00:01.000Z"},
-    {"correlationId": "f544fd06-b77d-4c0c-8626-1dc39c84a4dd", "modificationTime": "2022-05-01T00:00:01.000Z"},
-    {"correlationId": "f544fd06-b77d-4c0c-8626-1dc39c84a4de", "modificationTime": "2000-01-01T00:00:01.000Z"}
+    {"correlationId": "1", "modificationTime": "2022-01-01T00:00:01.000Z"},
+    {"correlationId": "2", "modificationTime": "2021-05-05T00:00:01.000Z"},
+    {"correlationId": "3", "modificationTime": "2021-04-30T00:00:01.000Z"},
+    {"correlationId": "4", "modificationTime": "2015-01-01T00:00:01.000Z"},
+    {"correlationId": "5", "modificationTime": "2022-05-01T00:00:01.000Z"},
+    {"correlationId": "6", "modificationTime": "2000-01-01T00:00:01.000Z"}
   ]
 }

@@ -1,14 +1,15 @@
 import {handleInterrupt, createLogger} from '@natlibfi/melinda-backend-commons';
 import * as config from './config.js';
 import startApp from './app.js';
+import moment from 'moment';
 
 run();
 
 async function run() {
   const logger = createLogger();
   registerInterruptionHandlers();
-
-  await startApp(config);
+  console.log(moment()); // eslint-disable-line
+  await startApp(config, '2001-11-10');
   return;
 
   function registerInterruptionHandlers() {

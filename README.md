@@ -9,9 +9,8 @@ Mongo database cleaner. Removes all items from collection based on modificationT
 # Usage
 
 ## Envs:
-* REMOVE_DATE_LIMIT='2020-01-01'
 * MONGO_URI='mongodb://localhost:43575'
-* MONGO_DATABASE_AND_COLLECTIONS='[{"db": "", "collection": "collectionName", "removeProtected": false}]'
+* MONGO_DATABASE_AND_COLLECTIONS='[{"db": "", "collection": "collectionName", "softRemoveDays": 7, "forceRemoveDays": 30}]'
   * db: Database name, "" makes mongo to use default database.
   * collection: Database collection name.
   * removeProtected: Boolean variable for forcing removal of protected items. Defaults false.
