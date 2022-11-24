@@ -1,8 +1,20 @@
 {
-  "name": "mongo-cleaner",
+  "name": "@natlibfi/mongo-cleaner",
   "version": "1.0.0",
-  "description": "",
+  "license": "MIT",
+  "description": "Mongo database cleaner. Removes all items from collection based on modificationTime time stamp (UTC)",
+  "author": {
+    "name": "The National Library of Finland"
+  },
+  "homepage": "https://github.com/natlibfi/mongo-cleaner",
+  "bugs": {
+    "url": "https://github.com/natlibfi/mongo-cleaner/issues"
+  },
   "main": "src/index.js",
+  "engines": {
+    "node": ">=14"
+  },
+  "bin": "./dist/index.js",
   "scripts": {
     "prepare": "npm run build",
     "start": "node dist/index.js",
@@ -10,17 +22,16 @@
     "build": "babel src --source-maps --copy-files --delete-dir-on-start --out-dir=dist",
     "lint": "eslint src",
     "lint:dev": "eslint --fix src",
-    "test:base": "cross-env NODE_ENV=test mocha --require @babel/register",
+    "test:base": "cross-env NODE_ENV=test mocha -b --exit --require @babel/register",
     "test": "npm run lint && npm run test:base -- src/*.spec.js",
     "test:dev": "npm run lint:dev && npm run test:base -- src/*.spec.js"
   },
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "@natlibfi/melinda-backend-commons": "^2.1.0",
     "debug": "^4.3.4",
     "moment": "^2.29.4",
-    "mongodb": "^4.10.0"
+    "mongo-sanitize": "^1.1.0",
+    "mongodb": "^4.12.1"
   },
   "devDependencies": {
     "@babel/cli": "latest",
@@ -32,13 +43,14 @@
     "@natlibfi/eslint-config-melinda-backend": "latest",
     "@natlibfi/fixugen": "latest",
     "@natlibfi/fixura": "latest",
-    "@natlibfi/fixura-mongo": "^2.0.0-alpha.1",
+    "@natlibfi/fixura-mongo": "^2.0.0",
     "chai": "latest",
     "cross-env": "latest",
     "eslint": "latest",
     "mocha": "latest"
   },
   "eslintConfig": {
+    "parser": "@babel/eslint-parser",
     "extends": "@natlibfi/melinda-backend"
   },
   "babel": {

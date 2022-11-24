@@ -1,45 +1,55 @@
 // import {expect} from 'chai';
-import fixtureFactory, {READERS} from '@natlibfi/fixura';
+import {READERS} from '@natlibfi/fixura';
+import generateTests from '@natlibfi/fixugen';
 import mongoFixturesFactory from '@natlibfi/fixura-mongo';
 import {expect} from 'chai';
 import startApp from './app';
 
-run();
+let mongoFixtures; // eslint-disable-line functional/no-let
 
-async function run() {
-
-  const promises = ['1', '2'].map(async index => {
-    const {getFixture} = await fixtureFactory({
-      root: [__dirname, '..', 'test-fixtures', 'clean', index],
-      reader: READERS.JSON
-    });
-    const metadata = await getFixture('metadata.json');
-
-    if (metadata.only) {
-      return it.only(`${index} ONLY ${metadata.description}`, () => testProcess({getFixture, index, ...metadata}));
+generateTests({
+  callback,
+  path: [__dirname, '..', 'test-fixtures', 'clean'],
+  recurse: false,
+  useMetadataFile: true,
+  fixura: {
+    failWhenNotFound: true,
+    reader: READERS.JSON
+  },
+  mocha: {
+    before: async () => {
+      await initMongofixtures();
+    },
+    beforeEach: () => mongoFixtures.clear(),
+    afterEach: () => mongoFixtures.clear(),
+    after: async () => {
+      await mongoFixtures.close();
     }
+  }
+});
 
-    if (metadata.skip) {
-      return it.skip(`${index} SKIP ${metadata.description}`, () => testProcess({getFixture, index, ...metadata}));
+async function initMongofixtures() {
+  mongoFixtures = await mongoFixturesFactory({
+    rootPath: [__dirname, '..', 'test-fixtures', 'clean'],
+    gridFS: {bucketName: 'blobs'},
+    useObjectId: true,
+    format: {
+      blobmetadatas: {
+        creationTime: v => new Date(v),
+        modificationTime: v => new Date(v)
+      }
     }
-
-    return it(`${index} ${metadata.description}`, () => testProcess({getFixture, index, ...metadata}));
   });
-
-  await Promise.all(promises);
-  throw new Error('done');
 }
 
-async function testProcess({getFixture, index, removeDateLimit, mongoDatabaseAndCollections}) {
-  const mongoFixtures = await mongoFixturesFactory({rootPath: [__dirname, '..', 'test-fixtures', 'clean', index], useObjectId: false});
+async function callback({
+  getFixture,
+  mongoDatabaseAndCollections
+}) {
   const mongoUri = await mongoFixtures.getUri();
-
-  await mongoFixtures.populate(['dbContents.json']);
-  await startApp({mongoUri, removeDateLimit, mongoDatabaseAndCollections});
+  await mongoFixtures.populate(getFixture('dbContents.json'));
+  await startApp({mongoUri, mongoDatabaseAndCollections}, '2021-05-08');
   const dump = await mongoFixtures.dump();
   const expectedResult = getFixture('expectedResult.json');
   expect(dump).to.eql(expectedResult);
-  mongoFixtures.clear();
-  mongoFixtures.close();
-  return;
 }
