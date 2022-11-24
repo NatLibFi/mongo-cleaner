@@ -8,8 +8,8 @@ run();
 async function run() {
   const logger = createLogger();
   registerInterruptionHandlers();
-  console.log(moment()); // eslint-disable-line
-  await startApp(config, '2001-11-10');
+  const date = moment().format();
+  await startApp(config, date);
   return;
 
   function registerInterruptionHandlers() {

@@ -1,9 +1,6 @@
-/* eslint-disable no-unused-vars */
-
 import {MongoClient} from 'mongodb';
 import moment from 'moment';
 import {createLogger} from '@natlibfi/melinda-backend-commons';
-import sanitize from 'mongo-sanitize';
 
 export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDate) {
   const logger = createLogger();
@@ -21,7 +18,7 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
   });
 
   await Promise.all(processes);
-  client.close();
+  await client.close();
   logger.info('Done');
   return;
 
