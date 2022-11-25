@@ -11,7 +11,7 @@ Mongo database cleaner. Removes all items from collection based on modificationT
 ## Envs:
 * POLL_TIME='0'
   * Defaults to '0'
-  * Time period between cleanings in ms (360000 = hour)
+  * Time period between cleanings in ms (3600000 = hour)
   * '0' = single run
 * MONGO_URI='mongodb://localhost:27017'
   * Defaults to mongodb://localhost:27017
