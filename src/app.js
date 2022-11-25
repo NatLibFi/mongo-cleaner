@@ -14,6 +14,7 @@ export default function (mongoUri, mongoDatabaseAndCollections, pollTime, moment
         return;
       }
 
+      logger.info(`Next cleanup: ${moment().add(pollTime, 'milliseconds').format()}`);
       await setTimeoutPromise(pollTime);
       return clean();
     }
