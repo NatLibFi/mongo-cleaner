@@ -6,7 +6,7 @@ import {promisify} from 'util';
 export default function (mongoUri, mongoDatabaseAndCollections, pollTime, momentDate) {
   const logger = createLogger();
   const setTimeoutPromise = promisify(setTimeout);
-  let currentDate = momentDate;
+  let currentDate = momentDate; // eslint-disable-line functional/no-let
   return timer();
 
   async function timer(wait) {
