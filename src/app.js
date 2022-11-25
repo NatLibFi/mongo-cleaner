@@ -58,7 +58,7 @@ export default function (mongoUri, mongoDatabaseAndCollections, pollTime, moment
         return searchItem(mongoOperator, collection, removeProtected, date);
       }
 
-      logger.info(`Collection ${collection} done`); // eslint-disable-line no-console
+      logger.info(`Collection ${collection} ${removeProtected ? 'hard' : 'soft'} cleaning done`); // eslint-disable-line no-console
       return;
     }
 
