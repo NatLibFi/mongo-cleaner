@@ -6,6 +6,7 @@ import {promisify} from 'util';
 export default function (mongoUri, mongoDatabaseAndCollections, pollTime, momentDate) {
   const logger = createLogger();
   const setTimeoutPromise = promisify(setTimeout);
+  let currentDate = momentDate;
   return timer();
 
   async function timer(wait) {
@@ -13,8 +14,8 @@ export default function (mongoUri, mongoDatabaseAndCollections, pollTime, moment
       if (pollTime === 0) {
         return;
       }
-
-      logger.info(`Next cleanup: ${moment().add(pollTime, 'milliseconds').format()}`);
+      currentDate = moment().format();
+      logger.info(`Next cleanup: ${moment.utc(currentDate).add(pollTime, 'milliseconds').format()}`);
       await setTimeoutPromise(pollTime);
       return clean();
     }
@@ -28,8 +29,8 @@ export default function (mongoUri, mongoDatabaseAndCollections, pollTime, moment
       const client = await MongoClient.connect(mongoUri, {useNewUrlParser: true, useUnifiedTopology: true});
 
       const processes = mongoDatabaseAndCollections.flatMap(({db, collection, softRemoveDays = 7, forceRemoveDays = 30}) => {
-        const softRemoveDate = moment(momentDate).subtract(softRemoveDays, 'd').format();
-        const forceRemoveDate = moment(momentDate).subtract(forceRemoveDays, 'd').format();
+        const softRemoveDate = moment(currentDate).subtract(softRemoveDays, 'd').format();
+        const forceRemoveDate = moment(currentDate).subtract(forceRemoveDays, 'd').format();
         const dbOperator = db === '' ? client.db() : client.db(db);
         return [
           searchItem(dbOperator.collection(collection), collection, false, softRemoveDate),
