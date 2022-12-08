@@ -34,8 +34,10 @@ async function initMongofixtures() {
     gridFS: {bucketName: 'blobs'},
     useObjectId: true,
     format: {
-      blobmetadatas: {
-        creationTime: v => new Date(v),
+      foo: {
+        modificationTime: v => new Date(v)
+      },
+      bar: {
         modificationTime: v => new Date(v)
       }
     }

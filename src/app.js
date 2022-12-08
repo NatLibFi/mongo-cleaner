@@ -65,10 +65,13 @@ export default function (mongoUri, mongoDatabaseAndCollections, pollTime, moment
     }
 
     function generateParams(removeProtected, date) {
+      const time = moment.utc(date);
+      const endTime = moment.utc(date);
+
       if (removeProtected) {
         // console.log('FORCE REMOVE: ', moment.utc(date).format()) // eslint-disable-line
         return {
-          modificationTime: {$lte: `${moment.utc(date).format()}`, $gte: '1900-01-01T00:00:01Z'}
+          modificationTime: {$lte: time.toDate(), $gte: endTime.toDate()}
         };
       }
 
@@ -77,8 +80,8 @@ export default function (mongoUri, mongoDatabaseAndCollections, pollTime, moment
         $and: [
           {
             modificationTime: {
-              $lte: `${moment.utc(date).format()}`,
-              $gte: '1900-01-01T00:00:01Z'
+              $lte: time.toDate(),
+              $gte: endTime.toDate()
             }
           },
           {
