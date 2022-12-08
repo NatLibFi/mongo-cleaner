@@ -68,7 +68,7 @@ export default function (mongoUri, mongoDatabaseAndCollections, pollTime, moment
       if (removeProtected) {
         // console.log('FORCE REMOVE: ', moment.utc(date).format()) // eslint-disable-line
         return {
-          modificationTime: {$lte: new Date(date), $gte: new Date('1900-01-01T00:00:01.000Z')}
+          creationTime: {$lte: new Date(date), $gte: new Date('1900-01-01T00:00:01.000Z')}
         };
       }
 
@@ -76,7 +76,7 @@ export default function (mongoUri, mongoDatabaseAndCollections, pollTime, moment
       return {
         $and: [
           {
-            modificationTime: {
+            creationTime: {
               $lte: new Date(date),
               $gte: new Date('1900-01-01T00:00:01.000Z')
             }
