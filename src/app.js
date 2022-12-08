@@ -56,7 +56,7 @@ export default function (mongoUri, mongoDatabaseAndCollections, pollTime, moment
 
       if (item) {
         logger.info(`Deleting logs id: ${item.correlationId}, Modified: ${item.creationTime}`);
-        await mongoOperator.deleteOne($and:[{correlationId: item.correlationId},{creationTime: item.creationTime}]);
+        await mongoOperator.deleteOne({$and: [{correlationId: item.correlationId}, {creationTime: item.creationTime}]});
         return searchItem(mongoOperator, collection, removeProtected, date);
       }
 
