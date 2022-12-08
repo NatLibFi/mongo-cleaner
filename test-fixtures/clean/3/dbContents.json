@@ -1,13 +1,71 @@
-{
-  "foo": [
-    {"correlationId": "1", "modificationTime": "2021-05-01T00:00:01.000Z", "protected": true},
-    {"correlationId": "2", "modificationTime": "2021-05-01T00:00:01.000Z", "protected": false},
-    {"correlationId": "3", "modificationTime": "2021-05-01T00:00:01.000Z"},
-    {"correlationId": "4", "modificationTime": "2021-04-10T00:00:01.000Z", "protected": true},
-    {"correlationId": "5", "modificationTime": "2021-04-10T00:00:01.000Z", "protected": false},
-    {"correlationId": "6", "modificationTime": "2021-04-10T00:00:01.000Z"},
-    {"correlationId": "7", "modificationTime": "2021-04-01T00:00:01.000Z", "protected": true},
-    {"correlationId": "8", "modificationTime": "2021-04-01T00:00:01.000Z", "protected": false},
-    {"correlationId": "9", "modificationTime": "2021-04-01T00:00:01.000Z"}
-  ]
-}
+[
+  {
+    "collection": "foo",
+    "value": {
+      "correlationId": "1",
+      "creationTime": "2021-05-01T00:00:01.000Z",
+      "protected": true
+    }
+  },
+  {
+    "collection": "foo",
+    "value": {
+      "correlationId": "2",
+      "creationTime": "2021-05-01T00:00:01.000Z",
+      "protected": false
+    }
+  },
+  {
+    "collection": "foo",
+    "value": {
+      "correlationId": "3",
+      "creationTime": "2021-05-01T00:00:01.000Z"
+    }
+  },
+  {
+    "collection": "foo",
+    "value": {
+      "correlationId": "4",
+      "creationTime": "2021-04-10T00:00:01.000Z",
+      "protected": true
+    }
+  },
+  {
+    "collection": "foo",
+    "value": {
+      "correlationId": "5",
+      "creationTime": "2021-04-10T00:00:01.000Z",
+      "protected": false
+    }
+  },
+  {
+    "collection": "foo",
+    "value": {
+      "correlationId": "6",
+      "creationTime": "2021-04-10T00:00:01.000Z"
+    }
+  },
+  {
+    "collection": "foo",
+    "value": {
+      "correlationId": "7",
+      "creationTime": "2021-04-01T00:00:01.000Z",
+      "protected": true
+    }
+  },
+  {
+    "collection": "foo",
+    "value": {
+      "correlationId": "8",
+      "creationTime": "2021-04-01T00:00:01.000Z",
+      "protected": false
+    }
+  },
+  {
+    "collection": "foo",
+    "value": {
+      "correlationId": "9",
+      "creationTime": "2021-04-01T00:00:01.000Z"
+    }
+  }
+]

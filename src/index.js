@@ -1,15 +1,16 @@
+import moment from 'moment';
 import {handleInterrupt, createLogger} from '@natlibfi/melinda-backend-commons';
 import * as config from './config.js';
 import startApp from './app.js';
-import moment from 'moment';
 
-run();
+run(config);
 
-async function run() {
+async function run({mongoUri, mongoDatabaseAndCollections, pollTime}) {
   const logger = createLogger();
   registerInterruptionHandlers();
   const date = moment().format();
-  await startApp(config, date);
+
+  await startApp(mongoUri, mongoDatabaseAndCollections, pollTime, date);
   return;
 
   function registerInterruptionHandlers() {

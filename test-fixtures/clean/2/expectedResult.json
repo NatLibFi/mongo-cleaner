@@ -1,6 +1,6 @@
 {
   "bar": [],
   "foo": [
-    {"correlationId": "2", "modificationTime": "2021-05-02T00:00:01.000Z"}
+    {"correlationId": "2", "creationTime": "2021-05-02T00:00:01.000Z"}
   ]
 }
