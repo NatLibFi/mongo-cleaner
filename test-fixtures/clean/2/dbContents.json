@@ -1,7 +1,23 @@
-{
-  "foo": [
-    {"correlationId": "1", "modificationTime": "2020-01-01T00:00:01.000Z"},
-    {"correlationId": "2", "modificationTime": "2021-05-02T00:00:01.000Z"}
-  ],
-  "bar": [{"correlationId": "1", "modificationTime": "2020-01-01T00:00:01.000Z"}]
-}
+[
+  {
+    "collection": "foo",
+    "value": {
+      "correlationId": "1",
+      "creationTime": "2020-01-01T00:00:01.000Z"
+    }
+  },
+  {
+    "collection": "foo",
+    "value": {
+      "correlationId": "2",
+      "creationTime": "2021-05-02T00:00:01.000Z"
+    }
+  },
+  {
+    "collection": "bar",
+    "value": {
+      "correlationId": "1",
+      "creationTime": "2020-01-01T00:00:01.000Z"
+    }
+  }
+]

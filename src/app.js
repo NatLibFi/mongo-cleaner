@@ -49,7 +49,7 @@ export default function (mongoUri, mongoDatabaseAndCollections, pollTime, moment
 
     async function searchItem(mongoOperator, collection, removeProtected, date) {
       // find and remove
-      // params "modificationTime":"2020-01-01T00:00:01.000Z",
+      // params "creationTime":"2020-01-01T00:00:01.000Z",
       const params = generateParams(removeProtected, date);
       logger.info(`Searching params: ${JSON.stringify(params)}`);
       const item = await mongoOperator.findOne(params);
