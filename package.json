@@ -34,7 +34,7 @@
     "mongodb": "^4.16.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.5",
+    "@babel/cli": "^7.22.9",
     "@babel/core": "latest",
     "@babel/eslint-parser": "latest",
     "@babel/node": "latest",
@@ -43,7 +43,7 @@
     "@natlibfi/eslint-config-melinda-backend": "latest",
     "@natlibfi/fixugen": "latest",
     "@natlibfi/fixura": "latest",
-    "@natlibfi/fixura-mongo": "^2.0.4",
+    "@natlibfi/fixura-mongo": "^2.0.5",
     "chai": "latest",
     "cross-env": "latest",
     "eslint": "latest",
