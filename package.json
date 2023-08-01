@@ -31,7 +31,7 @@
     "debug": "^4.3.4",
     "moment": "^2.29.4",
     "mongo-sanitize": "^1.1.0",
-    "mongodb": "^4.16.0"
+    "mongodb": "^5.7.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.9",
