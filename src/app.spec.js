@@ -24,7 +24,7 @@ generateTests({
     },
     beforeEach: () => mongoFixtures.clear(),
     afterEach: async () => {
-      if (client) { // eslint-disable-line functional/no-conditional-statement
+      if (client) { // eslint-disable-line functional/no-conditional-statements
         await client.close();
       }
       await mongoFixtures.clear();
