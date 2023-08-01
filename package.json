@@ -1,6 +1,6 @@
 {
   "name": "@natlibfi/mongo-cleaner",
-  "version": "1.0.0",
+  "version": "2.0.0-alpha.5",
   "license": "MIT",
   "description": "Mongo database cleaner. Removes all items from collection based on modificationTime time stamp (UTC)",
   "author": {
@@ -12,7 +12,7 @@
   },
   "main": "src/index.js",
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "bin": "./dist/index.js",
   "scripts": {
@@ -27,14 +27,14 @@
     "test:dev": "npm run lint:dev && npm run test:base -- src/*.spec.js"
   },
   "dependencies": {
-    "@natlibfi/melinda-backend-commons": "^2.1.0",
+    "@natlibfi/melinda-backend-commons": "^2.2.0",
     "debug": "^4.3.4",
     "moment": "^2.29.4",
     "mongo-sanitize": "^1.1.0",
-    "mongodb": "^4.12.1"
+    "mongodb": "^5.7.0"
   },
   "devDependencies": {
-    "@babel/cli": "latest",
+    "@babel/cli": "^7.22.9",
     "@babel/core": "latest",
     "@babel/eslint-parser": "latest",
     "@babel/node": "latest",
@@ -43,7 +43,7 @@
     "@natlibfi/eslint-config-melinda-backend": "latest",
     "@natlibfi/fixugen": "latest",
     "@natlibfi/fixura": "latest",
-    "@natlibfi/fixura-mongo": "^2.0.0",
+    "@natlibfi/fixura-mongo": "^2.0.5",
     "chai": "latest",
     "cross-env": "latest",
     "eslint": "latest",
