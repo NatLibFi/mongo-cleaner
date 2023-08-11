@@ -5,7 +5,7 @@ WORKDIR /home/node
 COPY --chown=node:node . build
 
 RUN apk add -U --no-cache --virtual .build-deps git build-base sudo
-RUN sudo -u node sh -c 'cd build && npm install && npm run build'
+RUN sudo -u node 'cd build && npm install && npm run build'
 RUN sudo -u node cp -r build/package.json build/dist/* .
 RUN sudo -u node npm install --prod
 RUN sudo -u node npm cache clean -f
