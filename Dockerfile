@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM registry.apps.ocp-kk-prod-1.k8s.it.helsinki.fi/melinda-rest-api-bib/melinda-rest-api-bib-node-alpine:18-alpine
 CMD ["/usr/local/bin/node", "index.js"]
 WORKDIR /home/node
 
