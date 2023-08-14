@@ -1,6 +1,9 @@
+import {promisify} from 'util';
 import {MongoClient} from 'mongodb';
 import moment from 'moment';
 import {createLogger} from '@natlibfi/melinda-backend-commons';
+
+const setTimeoutPromise = promisify(setTimeout);
 
 export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDate) {
   const logger = createLogger();
@@ -19,7 +22,10 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
 
   await Promise.all(processes);
   await client.close();
-  logger.info('Done');
+  logger.info('Done, await 2h till next restart');
+  await setTimeoutPromise(7200000); // 2h
+  //await setTimeoutPromise(10000); // 10sec
+  logger.info('Restarting');
   return;
 
   async function searchItem(mongoOperator, collection, removeProtected, date) {
