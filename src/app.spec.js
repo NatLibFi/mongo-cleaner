@@ -49,7 +49,6 @@ async function callback({
   const mongoUri = await mongoFixtures.getUri();
   await mongoFixtures.populate(getFixture('dbContents.json'));
   await startApp({mongoUri, mongoDatabaseAndCollections}, '2021-05-08');
-  console.log('here'); // eslint-disable-line
   const dump = await mongoFixtures.dump();
   const expectedResult = await getFixture('expectedResult.json');
   expect(dump).to.eql(expectedResult);
