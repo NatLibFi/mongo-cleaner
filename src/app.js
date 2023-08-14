@@ -20,8 +20,6 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
     ];
   });
 
-  console.log('here app'); // eslint-disable-line
-
   await Promise.all(processes);
   await client.close();
   if (momentDate === '2021-05-08') { // test escape
