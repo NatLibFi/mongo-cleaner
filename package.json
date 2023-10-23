@@ -43,7 +43,7 @@
     "@natlibfi/eslint-config-melinda-backend": "latest",
     "@natlibfi/fixugen": "latest",
     "@natlibfi/fixura": "latest",
-    "@natlibfi/fixura-mongo": "^2.0.6",
+    "@natlibfi/fixura-mongo": "^2.0.10",
     "chai": "latest",
     "cross-env": "latest",
     "eslint": "latest",

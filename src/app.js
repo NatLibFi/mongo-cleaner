@@ -38,8 +38,9 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
     const params = generateParams(removeProtected, date);
 
     const item = await mongoOperator.findOne(params);
-
     if (item) {
+      logger.silly('Found item!'); // eslint-disable-line no-console
+      logger.silly(JSON.stringify(item)); // eslint-disable-line no-console
       await mongoOperator.deleteOne({correlationId: item.correlationId});
       return searchItem(mongoOperator, collection, removeProtected, date);
     }

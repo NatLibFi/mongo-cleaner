@@ -1,7 +1,7 @@
 {
   "foo": [
-    {"correlationId": "1", "modificationTime": "2020-01-01T00:00:01.000Z"},
-    {"correlationId": "2", "modificationTime": "2021-05-02T00:00:01.000Z"}
+    {"correlationId": "foo1", "modificationTime": "2020-01-01T00:00:01.000Z"},
+    {"correlationId": "foo2", "modificationTime": "2021-05-02T00:00:01.000Z"}
   ],
-  "bar": [{"correlationId": "1", "modificationTime": "2020-01-01T00:00:01.000Z"}]
+  "bar": [{"correlationId": "bar1", "modificationTime": "2020-01-01T00:00:01.000Z"}]
 }
