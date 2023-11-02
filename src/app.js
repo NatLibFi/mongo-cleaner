@@ -47,7 +47,6 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
 
   async function searchItem(mongoOperator, {collection, removeProtected, date, test}) {
     // find and remove
-    // params "modificationTime":"2020-01-01T00:00:01.000Z",
     const params = generateParams(removeProtected, date, test);
 
     const item = await mongoOperator.findOne(params);
