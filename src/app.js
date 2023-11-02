@@ -29,15 +29,16 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
       return;
     }
 
-    logger.debug(JSON.stringify(config));
     const {db, collection, removeDaysFromNow, force, test = false} = config;
     const removeDate = new Date(momentDate);
     removeDate.setDate(removeDate.getDate() - removeDaysFromNow);
+    const removeDateIso = new Date(removeDate).toISOString();
     const dbOperator = db === '' ? client.db() : client.db(db);
+    logger.info(`Collection: ${config.collection}, Status: PROCESS, Remove items older than: ${removeDateIso}, Remove protected: ${config.force}`);
     await searchItem(dbOperator.collection(collection), {
       collection,
       removeProtected: force,
-      date: new Date(removeDate).toISOString(),
+      date: removeDateIso,
       test
     });
 
@@ -50,20 +51,18 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
     const params = generateParams(removeProtected, date, test);
 
     const item = await mongoOperator.findOne(params);
-    logger.debug(item); // eslint-disable-line no-console
 
     if (item === null) {
-      logger.info(`Collection ${collection} done, remove protected: ${removeProtected}`); // eslint-disable-line no-console
+      logger.info(`Collection: ${collection}, Status: DONE, remove Protected: ${removeProtected}`); // eslint-disable-line no-console
       return;
     }
 
-    logger.debug('Found item!'); // eslint-disable-line no-console
-    logger.debug(JSON.stringify(item)); // eslint-disable-line no-console
+    logger.debug(`Removing item: ${item.correlationId}, modified: ${item.modificationTime}`); // eslint-disable-line no-console
     await mongoOperator.deleteOne({correlationId: item.correlationId});
+
     return searchItem(mongoOperator, {collection, removeProtected, date, test});
 
     function generateParams(removeProtected, date, test) {
-      logger.info(date);
       if (removeProtected) {
         const query = {
           'modificationTime': {
@@ -72,7 +71,6 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
           }
         };
 
-        logger.debug(JSON.stringify(query));
         return query;
       }
 
@@ -90,7 +88,6 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
         ]
       };
 
-      logger.debug(JSON.stringify(query));
       return query;
     }
   }
