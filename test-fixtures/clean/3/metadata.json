@@ -5,8 +5,16 @@
     {
       "db": "",
       "collection": "foo",
-      "softRemoveDays": 7,
-      "forceRemoveDays": 30
+      "removeDaysFromNow": 7,
+      "force": false,
+      "test": true
+    },
+    {
+      "db": "",
+      "collection": "foo",
+      "removeDaysFromNow": 30,
+      "force": true,
+      "test": true
     }
   ]
 }
