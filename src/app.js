@@ -52,11 +52,11 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
     const item = await mongoOperator.findOne(params);
 
     if (item === null) {
-      logger.info(`Collection: ${collection}, Status: DONE, remove Protected: ${removeProtected}`); // eslint-disable-line no-console
+      logger.info(`Collection: ${collection}, Status: DONE, remove Protected: ${removeProtected}`);
       return;
     }
 
-    logger.debug(`Removing item: ${item.correlationId}, modified: ${item.modificationTime}`); // eslint-disable-line no-console
+    logger.debug(`Removing item: ${item.correlationId}, modified: ${item.modificationTime}`);
     await mongoOperator.deleteOne({correlationId: item.correlationId});
 
     return searchItem(mongoOperator, {collection, removeProtected, date, test});
