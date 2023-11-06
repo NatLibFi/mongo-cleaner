@@ -48,7 +48,7 @@ async function callback({
 }) {
   const mongoUri = await mongoFixtures.getUri();
   await mongoFixtures.populate(getFixture('dbContents.json'));
-  await startApp({mongoUri, mongoDatabaseAndCollections}, '2021-05-08');
+  await startApp({mongoUri, mongoDatabaseAndCollections}, '2021-05-08', true);
   const dump = await mongoFixtures.dump();
   const expectedResult = await getFixture('expectedResult.json');
   expect(dump).to.eql(expectedResult);

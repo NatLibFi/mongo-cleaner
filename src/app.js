@@ -1,6 +1,5 @@
 import {promisify} from 'util';
 import {MongoClient} from 'mongodb';
-import moment from 'moment';
 import {createLogger} from '@natlibfi/melinda-backend-commons';
 
 const setTimeoutPromise = promisify(setTimeout);
@@ -10,17 +9,8 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
   logger.info('Starting mongo cleaning');
   const client = await MongoClient.connect(mongoUri, {useNewUrlParser: true, useUnifiedTopology: true});
 
-  const processes = mongoDatabaseAndCollections.flatMap(({db, collection, softRemoveDays = 7, forceRemoveDays = 30}) => {
-    const softRemoveDate = moment(momentDate).subtract(softRemoveDays, 'd').format();
-    const forceRemoveDate = moment(momentDate).subtract(forceRemoveDays, 'd').format();
-    const dbOperator = db === '' ? client.db() : client.db(db);
-    return [
-      searchItem(dbOperator.collection(collection), collection, false, softRemoveDate),
-      searchItem(dbOperator.collection(collection), collection, true, forceRemoveDate)
-    ];
-  });
+  await createSearchProcess(mongoDatabaseAndCollections);
 
-  await Promise.all(processes);
   await client.close();
   if (momentDate === '2021-05-08') { // test escape
     return;
@@ -32,43 +22,72 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
   logger.info('Restarting');
   return;
 
-  async function searchItem(mongoOperator, collection, removeProtected, date) {
+  async function createSearchProcess(configs) {
+    const [config, ...rest] = configs;
+
+    if (config === undefined) {
+      return;
+    }
+
+    const {db, collection, removeDaysFromNow, force, test = false} = config;
+    const removeDate = new Date(momentDate);
+    removeDate.setDate(removeDate.getDate() - removeDaysFromNow);
+    const removeDateIso = new Date(removeDate).toISOString();
+    const dbOperator = db === '' ? client.db() : client.db(db);
+    logger.info(`Collection: ${config.collection}, Status: PROCESS, Remove items older than: ${removeDateIso}, Remove protected: ${config.force}`);
+    await searchItem(dbOperator.collection(collection), {
+      collection,
+      removeProtected: force,
+      date: removeDateIso,
+      test
+    });
+
+    return createSearchProcess(rest);
+  }
+
+  async function searchItem(mongoOperator, {collection, removeProtected, date, test}) {
     // find and remove
-    // params "modificationTime":"2020-01-01T00:00:01.000Z",
-    const params = generateParams(removeProtected, date);
+    const params = generateParams(removeProtected, date, test);
 
     const item = await mongoOperator.findOne(params);
 
-    if (item) {
-      await mongoOperator.deleteOne({correlationId: item.correlationId});
-      return searchItem(mongoOperator, collection, removeProtected, date);
+    if (item === null) {
+      logger.info(`Collection: ${collection}, Status: DONE, remove Protected: ${removeProtected}`);
+      return;
     }
 
-    logger.info(`Collection ${collection} done`); // eslint-disable-line no-console
-    return;
-  }
+    logger.debug(`Removing item: ${item.correlationId}, modified: ${item.modificationTime}`);
+    await mongoOperator.deleteOne({correlationId: item.correlationId});
 
-  function generateParams(removeProtected, date) {
-    if (removeProtected) {
-      // console.log('FORCE REMOVE: ', moment.utc(date).format()) // eslint-disable-line
-      return {
-        modificationTime: {$lte: `${moment.utc(date).format()}`, $gte: '1900-01-01T00:00:01Z'}
-      };
-    }
+    return searchItem(mongoOperator, {collection, removeProtected, date, test});
 
-    // console.log('SOFT REMOVE: ', moment.utc(date).format()) // eslint-disable-line
-    return {
-      $and: [
-        {
-          modificationTime: {
-            $lte: `${moment.utc(date).format()}`,
-            $gte: '1900-01-01T00:00:01Z'
+    function generateParams(removeProtected, date, test) {
+      if (removeProtected) {
+        const query = {
+          'modificationTime': {
+            '$gte': test ? new Date('2000-01-01').toISOString() : new Date('2000-01-01'),
+            '$lte': test ? new Date(date).toISOString() : new Date(date)
           }
-        },
-        {
-          protected: {$in: [null, false]}
-        }
-      ]
-    };
+        };
+
+        return query;
+      }
+
+      const query = {
+        '$and': [
+          {
+            'modificationTime': {
+              '$gte': test ? new Date('2000-01-01').toISOString() : new Date('2000-01-01'),
+              '$lte': test ? new Date(date).toISOString() : new Date(date)
+            }
+          },
+          {
+            'protected': {'$in': [null, false]}
+          }
+        ]
+      };
+
+      return query;
+    }
   }
 }
