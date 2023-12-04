@@ -57,7 +57,7 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
     }
 
     logger.debug(`Removing item: ${item.correlationId}, modified: ${item.modificationTime}`);
-    await mongoOperator.deleteOne({correlationId: item.correlationId});
+    await mongoOperator.deleteMany({correlationId: item.correlationId});
 
     return searchItem(mongoOperator, {collection, removeProtected, date, test});
 
