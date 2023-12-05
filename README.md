@@ -1,6 +1,6 @@
 # mongo-cleaner
 
-Mongo database cleaner. Removes all items from collection based on modificationTime time stamp (UTC)
+Mongo database cleaner. Removes all items from collection based on creationTime time stamp (UTC)
 
 **COMPATIBLE: MONGO 4.X**
 
