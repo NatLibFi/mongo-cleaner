@@ -64,7 +64,7 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
     function generateParams(removeProtected, date, test) {
       if (removeProtected) {
         const query = {
-          'modificationTime': {
+          'creationTime': {
             '$gte': test ? new Date('2000-01-01').toISOString() : new Date('2000-01-01'),
             '$lte': test ? new Date(date).toISOString() : new Date(date)
           }
@@ -76,7 +76,7 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
       const query = {
         '$and': [
           {
-            'modificationTime': {
+            'creationTime': {
               '$gte': test ? new Date('2000-01-01').toISOString() : new Date('2000-01-01'),
               '$lte': test ? new Date(date).toISOString() : new Date(date)
             }
@@ -87,6 +87,7 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
         ]
       };
 
+      console.log(JSON.stringify(query)); // eslint-disable-line
       return query;
     }
   }

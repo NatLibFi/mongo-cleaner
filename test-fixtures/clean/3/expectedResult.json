@@ -2,27 +2,27 @@
   "bar": [
     {
       "correlationId": "bar1",
-      "modificationTime": "2020-01-01T00:00:01.000Z"
+      "creationTime": "2020-01-01T00:00:01.000Z"
     }
   ],
   "foo": [
     {
       "correlationId": "1",
-      "modificationTime": "2021-05-01T00:00:01.000Z",
+      "creationTime": "2021-05-01T00:00:01.000Z",
       "protected": true
     },
     {
       "correlationId": "2",
-      "modificationTime": "2021-05-01T00:00:01.000Z",
+      "creationTime": "2021-05-01T00:00:01.000Z",
       "protected": false
     },
     {
       "correlationId": "3",
-      "modificationTime": "2021-05-01T00:00:01.000Z"
+      "creationTime": "2021-05-01T00:00:01.000Z"
     },
     {
       "correlationId": "4",
-      "modificationTime": "2021-04-10T00:00:01.000Z",
+      "creationTime": "2021-04-10T00:00:01.000Z",
       "protected": true
     }
   ]
