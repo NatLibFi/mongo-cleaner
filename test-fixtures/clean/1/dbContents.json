@@ -1,11 +1,11 @@
 {
   "foo": [
-    {"correlationId": "1", "creationTime": "2022-01-01T00:00:01.000Z"},
-    {"correlationId": "2", "creationTime": "2021-05-05T00:00:01.000Z"},
-    {"correlationId": "3", "creationTime": "2021-04-30T00:00:01.000Z"},
-    {"correlationId": "4", "creationTime": "2015-01-01T00:00:01.000Z"},
-    {"correlationId": "5", "creationTime": "2022-05-01T00:00:01.000Z"},
-    {"correlationId": "6", "creationTime": "2010-01-01T00:00:01.000Z"},
-    {"correlationId": "7", "creationTime": "2000-01-01T00:00:01.000Z"}
+    {"correlationId": "1", "creationTime": "2022-01-01T00:00:01.000Z", "protected": false},
+    {"correlationId": "2", "creationTime": "2021-05-05T00:00:01.000Z", "protected": false},
+    {"correlationId": "3", "creationTime": "2021-04-30T00:00:01.000Z", "protected": false},
+    {"correlationId": "4", "creationTime": "2015-01-01T00:00:01.000Z", "protected": false},
+    {"correlationId": "5", "creationTime": "2022-05-01T00:00:01.000Z", "protected": false},
+    {"correlationId": "6", "creationTime": "2010-01-01T00:00:01.000Z", "protected": false},
+    {"correlationId": "7", "creationTime": "2000-01-01T00:00:01.000Z", "protected": false}
   ]
 }
