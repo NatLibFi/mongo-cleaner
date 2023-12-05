@@ -87,7 +87,6 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
         ]
       };
 
-      console.log(JSON.stringify(query)); // eslint-disable-line
       return query;
     }
   }
