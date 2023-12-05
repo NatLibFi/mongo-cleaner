@@ -57,8 +57,13 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
     }
 
     logger.debug(`Removing item: ${item.correlationId}, created: ${item.creationTime}`);
-    await mongoOperator.deleteMany({correlationId: item.correlationId, protected: removeProtected});
 
+    if (removeProtected) {
+      await mongoOperator.deleteMany({correlationId: item.correlationId, protected: true});
+      return searchItem(mongoOperator, {collection, removeProtected, date, test});
+    }
+
+    await mongoOperator.deleteMany({correlationId: item.correlationId, protected: {$nin: [true]}});
     return searchItem(mongoOperator, {collection, removeProtected, date, test});
 
     function generateParams(removeProtected, date, test) {
