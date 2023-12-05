@@ -2,15 +2,18 @@
   "foo": [
     {
       "correlationId": "1",
-      "modificationTime": "2022-01-01T00:00:01.000Z"
+      "creationTime": "2022-01-01T00:00:01.000Z",
+      "protected": false
     },
     {
       "correlationId": "2",
-      "modificationTime": "2021-05-05T00:00:01.000Z"
+      "creationTime": "2021-05-05T00:00:01.000Z",
+      "protected": false
     },
     {
       "correlationId": "5",
-      "modificationTime": "2022-05-01T00:00:01.000Z"
+      "creationTime": "2022-05-01T00:00:01.000Z",
+      "protected": false
     }
   ]
 }

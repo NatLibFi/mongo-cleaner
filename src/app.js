@@ -56,15 +56,20 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
       return;
     }
 
-    logger.debug(`Removing item: ${item.correlationId}, modified: ${item.modificationTime}`);
-    await mongoOperator.deleteOne({correlationId: item.correlationId});
+    logger.debug(`Removing item: ${item.correlationId}, created: ${item.creationTime}`);
 
+    if (removeProtected) {
+      await mongoOperator.deleteMany({correlationId: item.correlationId, protected: true});
+      return searchItem(mongoOperator, {collection, removeProtected, date, test});
+    }
+
+    await mongoOperator.deleteMany({correlationId: item.correlationId, protected: {$nin: [true]}});
     return searchItem(mongoOperator, {collection, removeProtected, date, test});
 
     function generateParams(removeProtected, date, test) {
       if (removeProtected) {
         const query = {
-          'modificationTime': {
+          'creationTime': {
             '$gte': test ? new Date('2000-01-01').toISOString() : new Date('2000-01-01'),
             '$lte': test ? new Date(date).toISOString() : new Date(date)
           }
@@ -76,7 +81,7 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
       const query = {
         '$and': [
           {
-            'modificationTime': {
+            'creationTime': {
               '$gte': test ? new Date('2000-01-01').toISOString() : new Date('2000-01-01'),
               '$lte': test ? new Date(date).toISOString() : new Date(date)
             }

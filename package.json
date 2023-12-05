@@ -2,7 +2,7 @@
   "name": "@natlibfi/mongo-cleaner",
   "version": "1.0.0",
   "license": "MIT",
-  "description": "Mongo database cleaner. Removes all items from collection based on modificationTime time stamp (UTC)",
+  "description": "Mongo database cleaner. Removes all items from collection based on creationTime time stamp (UTC)",
   "author": {
     "name": "The National Library of Finland"
   },

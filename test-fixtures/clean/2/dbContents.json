@@ -1,9 +1,9 @@
 {
   "bar": [
-    {"correlationId": "bar1", "modificationTime": "2020-01-01T00:00:01.000Z"}
+    {"correlationId": "bar1", "creationTime": "2020-01-01T00:00:01.000Z", "protected": false}
   ],
   "foo": [
-    {"correlationId": "foo1", "modificationTime": "2020-01-01T00:00:01.000Z"},
-    {"correlationId": "foo2", "modificationTime": "2021-05-02T00:00:01.000Z"}
+    {"correlationId": "foo1", "creationTime": "2020-01-01T00:00:01.000Z", "protected": false},
+    {"correlationId": "foo2", "creationTime": "2021-05-02T00:00:01.000Z", "protected": false}
   ]
 }
