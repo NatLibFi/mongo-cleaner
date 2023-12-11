@@ -66,7 +66,7 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
     logger.debug(`Removing item: ${item.correlationId}, created: ${item.creationTime}`);
 
     if (removeProtected) {
-      await mongoOperator.deleteMany({correlationId: item.correlationId, protected: true});
+      await mongoOperator.deleteMany({correlationId: item.correlationId, protected: {'$in': [true, false, null]}});
       return searchItem(mongoOperator, {collection, removeProtected, file, date, test});
     }
 
