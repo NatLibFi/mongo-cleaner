@@ -6,7 +6,7 @@
       "db": "",
       "collection": "foo",
       "removeDaysFromNow": 7,
-      "force": false,
+      "removeProtected": false,
       "test": true
 
     },
@@ -14,21 +14,21 @@
       "db": "",
       "collection": "foo",
       "removeDaysFromNow": 30,
-      "force": true,
+      "removeProtected": true,
       "test": true
     },
     {
       "db": "",
       "collection": "bar",
       "removeDaysFromNow": 7,
-      "force": false,
+      "removeProtected": false,
       "test": true
     },
     {
       "db": "",
       "collection": "bar",
       "removeDaysFromNow": 30,
-      "force": true,
+      "removeProtected": true,
       "test": true
     }
   ]

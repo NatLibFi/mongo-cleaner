@@ -1,0 +1,16 @@
+{
+  "bar": [
+    {"correlationId": "bar1", "creationTime": "2020-01-01T00:00:01.000Z", "protected": false}
+  ],
+  "foo": [
+    {"filename": "1", "uploadDate": "2021-05-01T00:00:01.000Z"},
+    {"filename": "2", "uploadDate": "2021-05-01T00:00:01.000Z"},
+    {"filename": "3", "uploadDate": "2021-05-01T00:00:01.000Z"},
+    {"filename": "4", "uploadDate": "2021-04-10T00:00:01.000Z"},
+    {"filename": "5", "uploadDate": "2021-04-10T00:00:01.000Z"},
+    {"filename": "6", "uploadDate": "2021-04-10T00:00:01.000Z"},
+    {"filename": "7", "uploadDate": "2021-04-01T00:00:01.000Z"},
+    {"filename": "8", "uploadDate": "2021-04-01T00:00:01.000Z"},
+    {"filename": "9", "uploadDate": "2021-04-01T00:00:01.000Z"}
+  ]
+}
