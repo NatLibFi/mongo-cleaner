@@ -1,19 +1,19 @@
 {
-  "description": "Remove content that is not protected and is older than 2021-04-30, and force remove older than 2021-04-07, Does not touch collection bar",
+  "description": "Remove content that is not protected and is older than 2021-04-30, and removeProtected remove older than 2021-04-07, Does not touch collection bar",
   "only": false,
   "mongoDatabaseAndCollections": [
     {
       "db": "",
       "collection": "foo",
       "removeDaysFromNow": 7,
-      "force": false,
+      "removeProtected": false,
       "test": true
     },
     {
       "db": "",
       "collection": "foo",
       "removeDaysFromNow": 30,
-      "force": true,
+      "removeProtected": true,
       "test": true
     }
   ]

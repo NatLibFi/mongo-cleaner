@@ -10,10 +10,12 @@ Mongo database cleaner. Removes all items from collection based on creationTime 
 
 ## Envs:
 * MONGO_URI='mongodb://localhost:43575'
-* MONGO_DATABASE_AND_COLLECTIONS='[{"db": "", "collection": "collectionName", "softRemoveDays": 7, "forceRemoveDays": 30}]'
+* MONGO_DATABASE_AND_COLLECTIONS='[{"db": "", "collection": "collectionName", "removeProtected": boolean, "file": boolean, ("test": boolean)}]'
   * db: Database name, "" makes mongo to use default database.
   * collection: Database collection name.
   * removeProtected: Boolean variable for forcing removal of protected items. Defaults false.
+  * file: Boolean variable to determine file collection cleaning
+  * test: Boolean variable to determine if test params are to be used on file search. Mongo-memory-server and real mongo wants different types of time variables.
 
 ## Debug envs:
 * LOG_LEVEL='debug'

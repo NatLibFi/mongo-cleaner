@@ -1,0 +1,14 @@
+{
+  "description": "Remove files based on uploadDate",
+  "only": false,
+  "mongoDatabaseAndCollections": [
+    {
+      "db": "",
+      "collection": "foo",
+      "removeDaysFromNow": 7,
+      "removeProtected": false,
+      "file": true,
+      "test": true
+    }
+  ]
+}

@@ -29,25 +29,26 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
       return;
     }
 
-    const {db, collection, removeDaysFromNow, force, test = false} = config;
+    const {db, collection, removeDaysFromNow, removeProtected, file = false, test = false} = config;
     const removeDate = new Date(momentDate);
     removeDate.setDate(removeDate.getDate() - removeDaysFromNow);
     const removeDateIso = new Date(removeDate).toISOString();
     const dbOperator = db === '' ? client.db() : client.db(db);
-    logger.info(`Collection: ${config.collection}, Status: PROCESS, Remove items older than: ${removeDateIso}, Remove protected: ${config.force}`);
+    logger.info(`Collection: ${config.collection}, Status: PROCESS, Remove items older than: ${removeDateIso}, Remove protected: ${config.removeProtected}`);
     await searchItem(dbOperator.collection(collection), {
       collection,
-      removeProtected: force,
+      removeProtected,
       date: removeDateIso,
+      file,
       test
     });
 
     return createSearchProcess(rest);
   }
 
-  async function searchItem(mongoOperator, {collection, removeProtected, date, test}) {
+  async function searchItem(mongoOperator, {collection, removeProtected, date, file, test}) {
     // find and remove
-    const params = generateParams(removeProtected, date, test);
+    const params = generateParams(removeProtected, date, file, test);
 
     const item = await mongoOperator.findOne(params);
 
@@ -56,17 +57,34 @@ export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDa
       return;
     }
 
+    if (file) {
+      logger.debug(`Removing file item: ${item.filename}, created: ${item.uploadDate}`);
+      await mongoOperator.deleteMany({filename: item.filename});
+      return searchItem(mongoOperator, {collection, removeProtected, date, file, test});
+    }
+
     logger.debug(`Removing item: ${item.correlationId}, created: ${item.creationTime}`);
 
     if (removeProtected) {
       await mongoOperator.deleteMany({correlationId: item.correlationId, protected: true});
-      return searchItem(mongoOperator, {collection, removeProtected, date, test});
+      return searchItem(mongoOperator, {collection, removeProtected, file, date, test});
     }
 
     await mongoOperator.deleteMany({correlationId: item.correlationId, protected: {$nin: [true]}});
-    return searchItem(mongoOperator, {collection, removeProtected, date, test});
+    return searchItem(mongoOperator, {collection, removeProtected, file, date, test});
 
-    function generateParams(removeProtected, date, test) {
+    function generateParams(removeProtected, date, file, test) {
+      if (file) {
+        const query = {
+          'uploadDate': {
+            '$gte': test ? new Date('2000-01-01').toISOString() : new Date('2000-01-01'),
+            '$lte': test ? new Date(date).toISOString() : new Date(date)
+          }
+        };
+
+        return query;
+      }
+
       if (removeProtected) {
         const query = {
           'creationTime': {
