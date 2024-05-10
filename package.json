@@ -34,19 +34,19 @@
     "mongodb": "^5.9.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.9",
-    "@babel/core": "^7.23.9",
+    "@babel/cli": "^7.24.5",
+    "@babel/core": "^7.24.5",
     "@babel/node": "^7.23.9",
-    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-env": "^7.24.5",
     "@babel/register": "^7.23.7",
     "@natlibfi/eslint-config-melinda-backend": "^3.0.4",
     "@natlibfi/fixugen": "^2.0.4",
     "@natlibfi/fixura": "^3.0.4",
-    "@natlibfi/fixura-mongo": "^2.0.13",
+    "@natlibfi/fixura-mongo": "^2.0.14",
     "chai": "^4.4.1",
     "cross-env": "^7.0.3",
-    "eslint": "^8.56.0",
-    "mocha": "^10.3.0"
+    "eslint": "^8.57.0",
+    "mocha": "^10.4.0"
   },
   "eslintConfig": {
     "extends": "@natlibfi/melinda-backend"
