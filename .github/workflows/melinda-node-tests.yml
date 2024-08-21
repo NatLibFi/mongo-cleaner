@@ -91,6 +91,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Test bib webhook
+        uses: joelwmale/webhook-action@master
+        if: github.ref == 'refs/heads/main'
+        with:
+          url: ${{ secrets.WEBHOOK_URL_BIB_PROD_FROM_MAIN }}
+          body: '{}'
       - name: Test aut aux webhook
         uses: joelwmale/webhook-action@master
         if: github.ref == 'refs/heads/test'
