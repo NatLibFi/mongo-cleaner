@@ -1,7 +1,9 @@
 FROM ubi9/nodejs-18 as builder
 WORKDIR /home/node
 
-COPY --chown=node:node . build
+#COPY --chown=node:node . build
+COPY . build
+
 
 RUN apk add -U --no-cache --virtual .build-deps git sudo \
   && sudo -u node sh -c 'cd build && npm ci --ignore-scripts && npm run build && rm -rf node_modules' \
