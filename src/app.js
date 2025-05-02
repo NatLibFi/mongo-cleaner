@@ -7,7 +7,7 @@ const setTimeoutPromise = promisify(setTimeout);
 export default async function ({mongoUri, mongoDatabaseAndCollections}, momentDate) {
   const logger = createLogger();
   logger.info('Starting mongo cleaning');
-  const client = await MongoClient.connect(mongoUri, {useNewUrlParser: true, useUnifiedTopology: true});
+  const client = await MongoClient.connect(mongoUri);
 
   await createSearchProcess(mongoDatabaseAndCollections);
 
