@@ -29,7 +29,7 @@
   "dependencies": {
     "@natlibfi/melinda-backend-commons": "^2.3.7",
     "moment": "^2.30.1",
-    "mongodb": "^5.9.2"
+    "mongodb": "^6.16.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.27.1",
