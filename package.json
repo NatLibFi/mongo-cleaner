@@ -1,6 +1,6 @@
 {
   "name": "@natlibfi/mongo-cleaner",
-  "version": "3.0.0-alpha.2",
+  "version": "3.0.0-alpha.3",
   "license": "MIT",
   "description": "Mongo database cleaner. Removes all items from collection based on creationTime time stamp (UTC)",
   "author": {
