@@ -31,8 +31,8 @@
     "mongodb": "^6.20.0"
   },
   "devDependencies": {
-    "@natlibfi/fixugen": "^3.0.0-alpha",
-    "@natlibfi/fixura": "^4.0.0-alpha",
+    "@natlibfi/fixugen": "^3.0.0",
+    "@natlibfi/fixura": "^4.0.0",
     "@natlibfi/fixura-mongo": "^3.0.0",
     "cross-env": "^10.1.0",
     "esbuild": "^0.27.0",
