@@ -22,20 +22,20 @@
     "lint": "eslint src",
     "lint:dev": "eslint --fix src",
     "test:base": "node --test --test-force-exit --experimental-test-coverage --test-reporter=spec './src/*.test.js'",
-    "test": "npm run lint && npm run test:base -- src/*.spec.js",
-    "test:dev": "npm run lint:dev && npm run test:base -- src/*.spec.js"
+    "test": "npm run lint && npm run test:base",
+    "test:dev": "npm run lint:dev && npm run test:base"
   },
   "dependencies": {
-    "@natlibfi/melinda-backend-commons": "^3.0.0",
+    "@natlibfi/melinda-backend-commons": "^3.0.1",
     "moment": "^2.30.1",
     "mongodb": "^7.0.0"
   },
   "devDependencies": {
     "@natlibfi/fixugen": "^3.0.0",
     "@natlibfi/fixura": "^4.0.0",
-    "@natlibfi/fixura-mongo": "^3.0.0",
+    "@natlibfi/fixura-mongo": "^3.0.1",
     "cross-env": "^10.1.0",
-    "esbuild": "^0.27.0",
+    "esbuild": "^0.27.1",
     "eslint": "^9.39.1"
   }
 }
