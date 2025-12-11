@@ -1,6 +1,7 @@
 {
   "description": "Remove files based on uploadDate",
   "only": false,
+  "skip": false,
   "mongoDatabaseAndCollections": [
     {
       "db": "",
