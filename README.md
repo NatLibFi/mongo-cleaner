@@ -24,6 +24,6 @@ Mongo database cleaner. Removes all items from collection based on creationTime 
 
 ## License and copyright
 
-Copyright (c) 2022-2025 **University Of Helsinki (The National Library Of Finland)**
+Copyright (c) 2022-2026 **University Of Helsinki (The National Library Of Finland)**
 
 This project's source code is licensed under the terms of **MIT** or any later version.
