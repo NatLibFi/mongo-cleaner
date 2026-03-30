@@ -37,6 +37,6 @@
     "@natlibfi/fixura-mongo": "^3.0.2",
     "cross-env": "^10.1.0",
     "esbuild": "^0.27.2",
-    "eslint": "^9.39.2"
+    "eslint": "^10.1.0"
   }
 }
