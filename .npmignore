@@ -1,0 +1,6 @@
+# .npmignore overrides .gitignore for npm pack
+.github
+src
+test-fixtures
+workspace/
+.issues/
