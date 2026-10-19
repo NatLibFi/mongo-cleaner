@@ -101,7 +101,7 @@ async function removeFileItems(collection: Collection<FileItem>, {collection: na
   return removeFileItems(collection, {collection: name, removeProtected, date, useTestDates});
 }
 
-function dateRange({date, useTestDates}: {date: string, useTestDates: boolean}): {
+export function dateRange({date, useTestDates}: {date: string, useTestDates: boolean}): {
   readonly $gte: Date | string;
   readonly $lte: Date | string;
 } {
@@ -111,7 +111,7 @@ function dateRange({date, useTestDates}: {date: string, useTestDates: boolean}):
   };
 }
 
-function generateItemParams({removeProtected, date, useTestDates}: Omit<ItemSearchParams, 'collection'>): Filter<CorrelatedItem> {
+export function generateItemParams({removeProtected, date, useTestDates}: Omit<ItemSearchParams, 'collection'>): Filter<CorrelatedItem> {
   if (removeProtected) {
     return {creationTime: dateRange({date, useTestDates})};
   }
@@ -124,6 +124,6 @@ function generateItemParams({removeProtected, date, useTestDates}: Omit<ItemSear
   };
 }
 
-function generateFileItemParams({date, useTestDates}: Pick<ItemSearchParams, 'date' | 'useTestDates'>): Filter<FileItem> {
+export function generateFileItemParams({date, useTestDates}: Pick<ItemSearchParams, 'date' | 'useTestDates'>): Filter<FileItem> {
   return {uploadDate: dateRange({date, useTestDates})};
 }
