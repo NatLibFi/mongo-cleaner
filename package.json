@@ -19,6 +19,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "build": "rm -rf dist && tsc",
+    "prepare": "npm run build",
     "lint": "eslint src",
     "lint:dev": "eslint --fix src",
     "typecheck": "tsc -p tsconfig.test.json",
