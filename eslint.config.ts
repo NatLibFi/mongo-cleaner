@@ -6,7 +6,7 @@ export default defineConfig(
   [
     {
       files: [
-        "src/*"
+        "src/**/*.ts"
       ],
       ignores: ['node_modules/**', "**/.*", "**/dist/"],
       extends: [
