@@ -16,7 +16,8 @@ async function run() {
     process
       .on('SIGTERM', handleSignal)
       .on('SIGINT', handleInterrupt)
-      .on('uncaughtException', ({stack}) => {
+      .on('uncaughtException', (error) => {
+        const stack = error instanceof Error ? error.stack : undefined;
         handleTermination({code: 1, message: stack});
       })
       .on('unhandledRejection', (reason) => {
