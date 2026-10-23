@@ -1,14 +1,13 @@
 import {handleInterrupt, createLogger} from '@natlibfi/melinda-commons';
 import * as config from './config.ts';
 import startApp from './app.ts';
-import moment from 'moment';
 
 run();
 
 async function run() {
   const logger = createLogger();
   registerInterruptionHandlers();
-  const date = moment().format();
+  const date = new Date().toISOString();
   await startApp(config, date);
   return;
 

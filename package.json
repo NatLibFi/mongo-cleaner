@@ -30,7 +30,6 @@
   },
   "dependencies": {
     "@natlibfi/melinda-commons": "^16.0.0",
-    "moment": "^2.31.0",
     "mongodb": "^7.7.0"
   },
   "devDependencies": {
