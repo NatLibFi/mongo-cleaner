@@ -26,3 +26,7 @@ dist
 
 #Common temp files
 tmp
+
+# private scratch workspace (nested repo)
+workspace/
+.issues/
